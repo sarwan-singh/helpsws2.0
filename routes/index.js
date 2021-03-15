@@ -12,13 +12,26 @@ const WasteSchema = require('../public/javascripts/Models/WasteSchema')
 
 var Functions = require('../public/javascripts/Functions');
 
+
+/* To make API run 24/7. */
+
+const job = schedule.scheduleJob('0/20 * * * *',async function(){
+  request.get('https://helpsws.herokuapp.com/').then(function(body){
+    console.log("API TRIGGERED");
+  })
+});
+
 /* GET home page. */
 router.get('/', async function(req, res, next) {
+
+  res.status(200);
 
   res.send("API Running!!!");
 
 });
 
+/* To fetch a Garbage with provided id. If it doesn't exist
+    make a new one. */
 router.post('/id', async function(req, res, next){
 
   var id = req.body.id;
@@ -29,6 +42,8 @@ router.post('/id', async function(req, res, next){
 
 });
 
+/* To add a new garbage type in garbage with provided id and
+    garbage type. */
 router.post('/addGarbage', async function(req, res, next){
 
   var id = req.body.idValue;
