@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 const schedule = require('node-schedule');
+const request = require('request-promise').defaults({jar:true});
 
 var GetGarbageService = require('../public/javascripts/Services/GetGarbageService');
 var AddGarbageService = require('../public/javascripts/Services/AddGarbageService');
