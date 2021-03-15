@@ -55,7 +55,7 @@ router.post('/addGarbage', async function(req, res, next){
   var garbage = await GetGarbageService.checkIfExists(id);
 
   if(AddGarbageService.checkIfFull(garbage)){
-    res.send("Garbage is full!!!");
+    res.send(garbage);
   }else{
     await AddGarbageService.addGarbage(garbage, type);
     res.send(await GetGarbageService.checkIfExists(id));
