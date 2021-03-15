@@ -48,7 +48,7 @@ router.post('/id', async function(req, res, next){
     garbage type. */
 router.post('/addGarbage', async function(req, res, next){
 
-  var id = req.body.idValue;
+  var id = req.body.id;
 
   var type = req.body.type;
 
