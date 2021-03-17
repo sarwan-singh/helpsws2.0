@@ -23,11 +23,17 @@ module.exports = {
             _id: id,
             totalCapacity: 50,
             filledCapacity: 0,
-            paperCOunt: 0,
+            paperCount: 0,
             plasticCount: 0,
             glassCount: 0,
             metalCount: 0,
             bioCount: 0,
+            paperPercentage: 0,
+            plasticPercentage: 0,
+            glassPercentage: 0,
+            metalPercentage: 0,
+            bioPercentage: 0,
+            emptyPercentage: 0,
             isFull: false
         });
 
