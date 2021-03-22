@@ -32,6 +32,10 @@ router.get('/', async function(req, res, next) {
 
 });
 
+router.get('/testing', async function(req, res, next){
+  
+})
+
 /* To fetch a Garbage with provided id. If it doesn't exist
     make a new one. */
 router.post('/id', async function(req, res, next){
