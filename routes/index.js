@@ -3,12 +3,12 @@ var router = express.Router();
 var mongoose = require('mongoose');
 const schedule = require('node-schedule');
 const request = require('request-promise').defaults({jar:true});
+var cors = require('cors')
 
 var GetGarbageService = require('../public/javascripts/Services/GetGarbageService');
 var AddGarbageService = require('../public/javascripts/Services/AddGarbageService');
 
 mongoose.set('useFindAndModify', false);
-
 
 const WasteSchema = require('../public/javascripts/Models/WasteSchema')
 
@@ -41,6 +41,14 @@ router.post('/id', async function(req, res, next){
   var garbage = await GetGarbageService.checkIfExists(id);
 
   res.send(garbage);
+
+});
+
+router.get('/:id', async function(req, res, next){
+
+  var idValue = req.params.id;
+
+  res.redirect("smartwastesegregator.netlify.app")
 
 });
 
