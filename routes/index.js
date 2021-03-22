@@ -3,7 +3,8 @@ var router = express.Router();
 var mongoose = require('mongoose');
 const schedule = require('node-schedule');
 const request = require('request-promise').defaults({jar:true});
-var cors = require('cors')
+var EventEmitter = require('events');
+var Event = new EventEmitter();
 
 var GetGarbageService = require('../public/javascripts/Services/GetGarbageService');
 var AddGarbageService = require('../public/javascripts/Services/AddGarbageService');
@@ -33,8 +34,13 @@ router.get('/', async function(req, res, next) {
 });
 
 router.get('/testing', async function(req, res, next){
+  
+  Event.on('ScannedQR', function(){
+    res.send("Just testing stuff, Did it came after 5 secs?");
+  })
+
   setTimeout(function(){
-    res.send("Just testing stuff, Did it came after 5 secs?")
+    Event.emit('ScannedQR');
   }, 5000)
 
 })
