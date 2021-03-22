@@ -70,13 +70,20 @@ router.get('/scan/:id', async function(req, res, next){
 
   var id = req.params.id;
 
-  var data = WorkingBinSchema.find({_id: id});
+  var query = {
+    _id : id
+  }
 
-  data = data[0];
+  var data = await WorkingBinSchema.find(query);
+  console.log(data[0]);
 
-  var something = await WorkingBinSchema.watch();
+  var something = WorkingBinSchema.watch();
 
-  res.send(something);
+  something.on('change', change =>{
+    console.log(change);
+    res.send(JSON.stringify(change));
+  })
+
 })
 
 

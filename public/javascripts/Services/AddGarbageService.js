@@ -13,8 +13,41 @@ module.exports = {
             _id : waste._id
         };
 
+        var tempMultiplier = 100/waste.totalCapacity;
+
+        var emptyPercentage = waste.totalCapacity - waste.filledCapacity - 1;
+        
+        var convertedPercentages = {
+            plasticPercentage : (waste.plasticCount)*tempMultiplier.toFixed(2),
+            paperPercentage : (waste.paperCount)*tempMultiplier.toFixed(2),
+            glassPercentage : (waste.glassCount)*tempMultiplier.toFixed(2),
+            metalPercentage : (waste.metalCount)*tempMultiplier.toFixed(2),
+            bioPercentage : (waste.bioCount)*tempMultiplier.toFixed(2),
+            emptyPercentage : (emptyPercentage)*tempMultiplier.toFixed(2)
+        }
+        
+        var percentages = {
+            plasticPercentage : (waste.plasticCount+1)*tempMultiplier.toFixed(2),
+            paperPercentage : (waste.paperCount+1)*tempMultiplier.toFixed(2),
+            glassPercentage : (waste.glassCount+1)*tempMultiplier.toFixed(2),
+            metalPercentage : (waste.metalCount+1)*tempMultiplier.toFixed(2),
+            bioPercentage : (waste.bioCount+1)*tempMultiplier.toFixed(2),
+        }
+
         var update = {
-            isFull: false
+            isFull: false,
+            plasticPercentage : convertedPercentages.plasticPercentage,
+            paperPercentage : convertedPercentages.paperPercentage,
+            glassPercentage : convertedPercentages.glassPercentage,
+            metalPercentage : convertedPercentages.metalPercentage,
+            bioPercentage : convertedPercentages.bioPercentage,
+            emptyPercentage : convertedPercentages.emptyPercentage,
+            $inc: { filledCapacity: 1,
+                    plasticCount : 0 ,
+                    paperCount : 0,
+                    metalCount: 0,
+                    bioCount: 0,
+                    glassCount: 0 }
         };
 
         if(waste.filledCapacity==waste.totalCapacity - 1){
@@ -23,54 +56,21 @@ module.exports = {
             }
         }
 
-        var tempMultiplier = 100/waste.totalCapacity;
-
-        var emptyPercentage = waste.totalCapacity - waste.filledCapacity - 1;
-
-        var percentages = {
-            plasticPercentage : (waste.plasticCount+1)*tempMultiplier.toFixed(2),
-            paperPercentage : (waste.paperCount+1)*tempMultiplier.toFixed(2),
-            glassPercentage : (waste.glassCount+1)*tempMultiplier.toFixed(2),
-            metalPercentage : (waste.metalCount+1)*tempMultiplier.toFixed(2),
-            bioPercentage : (waste.bioCount+1)*tempMultiplier.toFixed(2),
-            emptyPercentage : (emptyPercentage)*tempMultiplier.toFixed(2)
-        }
-
         switch(garbageType){
-            case "plastic" :  update = {
-                                    isFull: update.isFull,
-                                    plasticPercentage : percentages.plasticPercentage,
-                                    emptyPercentage : percentages.emptyPercentage,
-                                    $inc: { filledCapacity: 1, plasticCount : 1 }
-                                };
+            case "plastic" :    update.plasticPercentage = percentages.plasticPercentage;
+                                update.$inc.plasticCount = 1;
                                 break;
-            case "paper" :  update = {
-                                    isFull: update.isFull,
-                                    paperPercentage : percentages.paperPercentage,
-                                    emptyPercentage : percentages.emptyPercentage,
-                                    $inc: { filledCapacity: 1, paperCount : 1 }
-                                };
+            case "paper" :      update.paperPercentage = percentages.paperPercentage;
+                                update.$inc.paperCount = 1;
                                 break;
-            case "glass" :  update = {
-                                    isFull: update.isFull,
-                                    glassPercentage : percentages.glassPercentage,
-                                    emptyPercentage : percentages.emptyPercentage,
-                                    $inc: { filledCapacity: 1, glassCount : 1 }
-                                };
-                                break; 
-            case "metal" :  update = {
-                                    isFull: update.isFull,
-                                    metalPercentage : percentages.metalPercentage,
-                                    emptyPercentage : percentages.emptyPercentage,
-                                    $inc: { filledCapacity: 1, metalCount : 1 }
-                                };
+            case "glass" :      update.glassPercentage = percentages.glassPercentage;
+                                update.$inc.glassCount = 1;
                                 break;
-            case "bio" :  update = {
-                                    isFull: update.isFull,
-                                    bioPercentage : percentages.bioPercentage,
-                                    emptyPercentage : percentages.emptyPercentage,
-                                    $inc: { filledCapacity: 1, bioCount : 1 }
-                                };
+            case "metal" :      update.metalPercentage = percentages.metalPercentage;
+                                update.$inc.metalCount = 1;
+                                break;
+            case "bio" :        update.bioPercentage = percentages.bioPercentage;
+                                update.$inc.bioCount = 1;
                                 break;
         }
 
