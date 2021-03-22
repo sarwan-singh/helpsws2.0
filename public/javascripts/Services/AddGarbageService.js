@@ -18,20 +18,20 @@ module.exports = {
         var emptyPercentage = waste.totalCapacity - waste.filledCapacity - 1;
         
         var convertedPercentages = {
-            plasticPercentage : (waste.plasticCount)*tempMultiplier.toFixed(2),
-            paperPercentage : (waste.paperCount)*tempMultiplier.toFixed(2),
-            glassPercentage : (waste.glassCount)*tempMultiplier.toFixed(2),
-            metalPercentage : (waste.metalCount)*tempMultiplier.toFixed(2),
-            bioPercentage : (waste.bioCount)*tempMultiplier.toFixed(2),
-            emptyPercentage : (emptyPercentage)*tempMultiplier.toFixed(2)
+            plasticPercentage : (waste.plasticCount)*tempMultiplier,
+            paperPercentage : (waste.paperCount)*tempMultiplier,
+            glassPercentage : (waste.glassCount)*tempMultiplier,
+            metalPercentage : (waste.metalCount)*tempMultiplier,
+            bioPercentage : (waste.bioCount)*tempMultiplier,
+            emptyPercentage : (emptyPercentage)*tempMultiplier
         }
         
         var percentages = {
-            plasticPercentage : (waste.plasticCount+1)*tempMultiplier.toFixed(2),
-            paperPercentage : (waste.paperCount+1)*tempMultiplier.toFixed(2),
-            glassPercentage : (waste.glassCount+1)*tempMultiplier.toFixed(2),
-            metalPercentage : (waste.metalCount+1)*tempMultiplier.toFixed(2),
-            bioPercentage : (waste.bioCount+1)*tempMultiplier.toFixed(2),
+            plasticPercentage : (waste.plasticCount+1)*tempMultiplier,
+            paperPercentage : (waste.paperCount+1)*tempMultiplier,
+            glassPercentage : (waste.glassCount+1)*tempMultiplier,
+            metalPercentage : (waste.metalCount+1)*tempMultiplier,
+            bioPercentage : (waste.bioCount+1)*tempMultiplier,
         }
 
         var update = {
