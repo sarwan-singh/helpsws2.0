@@ -71,9 +71,21 @@ router.post('/scan', async function(req, res, next){
 
   var id = req.body.id;
 
-  var query = ScanService.getQuery(id);
-
   await ScanService.detectChange(id, res);
+
+})
+
+/* To change status of scan from frontend app so that it could be detected
+    on machine*/
+router.post('/scanned', async function(req, res, next){
+
+  var id = req.body.id;
+
+  var wasteStatus = await ScanService.getData(id);
+
+  var data = await ScanService.changeData(id, wasteStatus);
+
+  res.send(data);
 
 })
 
