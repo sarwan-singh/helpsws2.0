@@ -8,6 +8,7 @@ var Event = new EventEmitter();
 
 var GetGarbageService = require('../public/javascripts/Services/GetGarbageService');
 var AddGarbageService = require('../public/javascripts/Services/AddGarbageService');
+var ScanService = require('../public/javascripts/Services/ScanService');
 
 mongoose.set('useFindAndModify', false);
 
@@ -70,18 +71,18 @@ router.get('/scan/:id', async function(req, res, next){
 
   var id = req.params.id;
 
-  var query = {
-    _id : id
-  }
+  var query = ScanService.getQuery(id);
 
   var data = await WorkingBinSchema.find(query);
-  console.log(data[0]);
+  data = data[0].isWorking;
 
   var something = WorkingBinSchema.watch();
 
   something.on('change', change =>{
     console.log(change);
-    res.send(JSON.stringify(change));
+    if(documentKey._id==id){
+      res.send(JSON.stringify(change));
+    }
   })
 
 })

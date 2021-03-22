@@ -18,7 +18,7 @@ module.exports = {
             _id : waste._id
         };
 
-        var tempMultiplier = 100/waste.totalCapacity;
+        var tempMultiplier = 100/waste.filledCapacity;
 
         var emptyPercentage = waste.totalCapacity - waste.filledCapacity - 1;
         
