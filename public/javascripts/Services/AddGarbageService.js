@@ -1,12 +1,17 @@
 var WasteSchema = require('../Models/WasteSchema');
 var mongoose = require('mongoose');
 
+function roundToTwo(num) {    
+    return +(Math.round(num + "e+2")  + "e-2");
+}
+
 module.exports = {
 
     checkIfFull : function(waste){
         return waste.isFull;
     },
 
+    
     addGarbage : async function(waste, garbageType){
        
         var query = {
@@ -18,20 +23,20 @@ module.exports = {
         var emptyPercentage = waste.totalCapacity - waste.filledCapacity - 1;
         
         var convertedPercentages = {
-            plasticPercentage : (waste.plasticCount)*tempMultiplier,
-            paperPercentage : (waste.paperCount)*tempMultiplier,
-            glassPercentage : (waste.glassCount)*tempMultiplier,
-            metalPercentage : (waste.metalCount)*tempMultiplier,
-            bioPercentage : (waste.bioCount)*tempMultiplier,
-            emptyPercentage : (emptyPercentage)*tempMultiplier
+            plasticPercentage : (waste.plasticCount)*tempMultiplier.roundToTwo(),
+            paperPercentage : (waste.paperCount)*tempMultiplier.roundToTwo(),
+            glassPercentage : (waste.glassCount)*tempMultiplier.roundToTwo(),
+            metalPercentage : (waste.metalCount)*tempMultiplier.roundToTwo(),
+            bioPercentage : (waste.bioCount)*tempMultiplier.roundToTwo(),
+            emptyPercentage : (emptyPercentage)*tempMultiplier.roundToTwo()
         }
         
         var percentages = {
-            plasticPercentage : (waste.plasticCount+1)*tempMultiplier,
-            paperPercentage : (waste.paperCount+1)*tempMultiplier,
-            glassPercentage : (waste.glassCount+1)*tempMultiplier,
-            metalPercentage : (waste.metalCount+1)*tempMultiplier,
-            bioPercentage : (waste.bioCount+1)*tempMultiplier,
+            plasticPercentage : (waste.plasticCount+1)*tempMultiplier.roundToTwo(),
+            paperPercentage : (waste.paperCount+1)*tempMultiplier.roundToTwo(),
+            glassPercentage : (waste.glassCount+1)*tempMultiplier.roundToTwo(),
+            metalPercentage : (waste.metalCount+1)*tempMultiplier.roundToTwo(),
+            bioPercentage : (waste.bioCount+1)*tempMultiplier.roundToTwo(),
         }
 
         var update = {
