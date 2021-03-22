@@ -67,23 +67,13 @@ router.post('/addGarbage', async function(req, res, next){
 
 /* To listen on if any garbage is scanned or session is ended with 
     the provided id*/
-router.get('/scan/:id', async function(req, res, next){
+router.post('/scan', async function(req, res, next){
 
-  var id = req.params.id;
+  var id = req.body.id;
 
   var query = ScanService.getQuery(id);
 
-  var data = await WorkingBinSchema.find(query);
-  data = data[0].isWorking;
-
-  var something = WorkingBinSchema.watch();
-
-  something.on('change', change =>{
-    console.log(change);
-    if(documentKey._id==id){
-      res.send(JSON.stringify(change));
-    }
-  })
+  await ScanService.detectChange(id, res);
 
 })
 
