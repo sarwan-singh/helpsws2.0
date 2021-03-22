@@ -20,6 +20,8 @@ module.exports = {
 
         var tempMultiplier = 100/waste.filledCapacity;
 
+        var tempEmptyMultiplier = 100/waste.totalCapacity;
+
         var emptyPercentage = waste.totalCapacity - waste.filledCapacity - 1;
         
         var convertedPercentages = {
@@ -28,7 +30,7 @@ module.exports = {
             glassPercentage : roundToTwo((waste.glassCount)*tempMultiplier),
             metalPercentage : roundToTwo((waste.metalCount)*tempMultiplier),
             bioPercentage : roundToTwo((waste.bioCount)*tempMultiplier),
-            emptyPercentage : roundToTwo((emptyPercentage)*tempMultiplier)
+            emptyPercentage : roundToTwo((emptyPercentage)*tempEmptyMultiplier)
         }
         
         var percentages = {
