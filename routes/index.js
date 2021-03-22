@@ -33,7 +33,10 @@ router.get('/', async function(req, res, next) {
 });
 
 router.get('/testing', async function(req, res, next){
-  
+  setTimeout(function(){
+    res.send("Just testing stuff, Did it came after 5 secs?")
+  }, 5000)
+
 })
 
 /* To fetch a Garbage with provided id. If it doesn't exist
