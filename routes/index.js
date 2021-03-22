@@ -34,13 +34,9 @@ router.get('/', async function(req, res, next) {
 });
 
 router.get('/testing', async function(req, res, next){
-  
-  Event.on('ScannedQR', function(){
-    res.send("QR Scanned");
-  })
 
   setTimeout(function(){
-    Event.emit('ScannedQR');
+    res.send("QR SCANNED");
   }, 5000)
 
 })
