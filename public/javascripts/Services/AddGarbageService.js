@@ -23,20 +23,20 @@ module.exports = {
         var emptyPercentage = waste.totalCapacity - waste.filledCapacity - 1;
         
         var convertedPercentages = {
-            plasticPercentage : (waste.plasticCount)*tempMultiplier.roundToTwo(),
-            paperPercentage : (waste.paperCount)*tempMultiplier.roundToTwo(),
-            glassPercentage : (waste.glassCount)*tempMultiplier.roundToTwo(),
-            metalPercentage : (waste.metalCount)*tempMultiplier.roundToTwo(),
-            bioPercentage : (waste.bioCount)*tempMultiplier.roundToTwo(),
-            emptyPercentage : (emptyPercentage)*tempMultiplier.roundToTwo()
+            plasticPercentage : roundToTwo((waste.plasticCount)*tempMultiplier),
+            paperPercentage : roundToTwo((waste.paperCount)*tempMultiplier.roundToTwo()),
+            glassPercentage : roundToTwo((waste.glassCount)*tempMultiplier.roundToTwo()),
+            metalPercentage : roundToTwo((waste.metalCount)*tempMultiplier.roundToTwo()),
+            bioPercentage : roundToTwo((waste.bioCount)*tempMultiplier.roundToTwo()),
+            emptyPercentage : roundToTwo((emptyPercentage)*tempMultiplier.roundToTwo())
         }
         
         var percentages = {
-            plasticPercentage : (waste.plasticCount+1)*tempMultiplier.roundToTwo(),
-            paperPercentage : (waste.paperCount+1)*tempMultiplier.roundToTwo(),
-            glassPercentage : (waste.glassCount+1)*tempMultiplier.roundToTwo(),
-            metalPercentage : (waste.metalCount+1)*tempMultiplier.roundToTwo(),
-            bioPercentage : (waste.bioCount+1)*tempMultiplier.roundToTwo(),
+            plasticPercentage : roundToTwo((waste.plasticCount+1)*tempMultiplier.roundToTwo()),
+            paperPercentage : roundToTwo((waste.paperCount+1)*tempMultiplier.roundToTwo()),
+            glassPercentage : roundToTwo((waste.glassCount+1)*tempMultiplier.roundToTwo()),
+            metalPercentage : roundToTwo((waste.metalCount+1)*tempMultiplier.roundToTwo()),
+            bioPercentage : roundToTwo((waste.bioCount+1)*tempMultiplier.roundToTwo()),
         }
 
         var update = {
