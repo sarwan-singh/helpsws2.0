@@ -24,19 +24,19 @@ module.exports = {
         
         var convertedPercentages = {
             plasticPercentage : roundToTwo((waste.plasticCount)*tempMultiplier),
-            paperPercentage : roundToTwo((waste.paperCount)*tempMultiplier.roundToTwo()),
-            glassPercentage : roundToTwo((waste.glassCount)*tempMultiplier.roundToTwo()),
-            metalPercentage : roundToTwo((waste.metalCount)*tempMultiplier.roundToTwo()),
-            bioPercentage : roundToTwo((waste.bioCount)*tempMultiplier.roundToTwo()),
-            emptyPercentage : roundToTwo((emptyPercentage)*tempMultiplier.roundToTwo())
+            paperPercentage : roundToTwo((waste.paperCount)*tempMultiplier),
+            glassPercentage : roundToTwo((waste.glassCount)*tempMultiplier),
+            metalPercentage : roundToTwo((waste.metalCount)*tempMultiplier),
+            bioPercentage : roundToTwo((waste.bioCount)*tempMultiplier),
+            emptyPercentage : roundToTwo((emptyPercentage)*tempMultiplier)
         }
         
         var percentages = {
-            plasticPercentage : roundToTwo((waste.plasticCount+1)*tempMultiplier.roundToTwo()),
-            paperPercentage : roundToTwo((waste.paperCount+1)*tempMultiplier.roundToTwo()),
-            glassPercentage : roundToTwo((waste.glassCount+1)*tempMultiplier.roundToTwo()),
-            metalPercentage : roundToTwo((waste.metalCount+1)*tempMultiplier.roundToTwo()),
-            bioPercentage : roundToTwo((waste.bioCount+1)*tempMultiplier.roundToTwo()),
+            plasticPercentage : roundToTwo((waste.plasticCount+1)*tempMultiplier),
+            paperPercentage : roundToTwo((waste.paperCount+1)*tempMultiplier),
+            glassPercentage : roundToTwo((waste.glassCount+1)*tempMultiplier),
+            metalPercentage : roundToTwo((waste.metalCount+1)*tempMultiplier),
+            bioPercentage : roundToTwo((waste.bioCount+1)*tempMultiplier),
         }
 
         var update = {
