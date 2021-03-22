@@ -12,9 +12,9 @@ var AddGarbageService = require('../public/javascripts/Services/AddGarbageServic
 mongoose.set('useFindAndModify', false);
 
 const WasteSchema = require('../public/javascripts/Models/WasteSchema')
+const WorkingBinSchema = require("../public/javascripts/Models/WorkingBinSchema");
 
 var Functions = require('../public/javascripts/Functions');
-
 
 /* To make API run 24/7. */
 
@@ -33,14 +33,6 @@ router.get('/', async function(req, res, next) {
 
 });
 
-router.get('/testing', async function(req, res, next){
-
-  setTimeout(function(){
-    res.send("QR SCANNED");
-  }, 5000)
-
-})
-
 /* To fetch a Garbage with provided id. If it doesn't exist
     make a new one. */
 router.post('/id', async function(req, res, next){
@@ -50,14 +42,6 @@ router.post('/id', async function(req, res, next){
   var garbage = await GetGarbageService.checkIfExists(id);
 
   res.send(garbage);
-
-});
-
-router.get('/:id', async function(req, res, next){
-
-  var idValue = req.params.id;
-
-  res.redirect("smartwastesegregator.netlify.app")
 
 });
 
@@ -77,6 +61,22 @@ router.post('/addGarbage', async function(req, res, next){
     await AddGarbageService.addGarbage(garbage, type);
     res.send(await GetGarbageService.checkIfExists(id));
   }
+})
+
+
+/* To listen on if any garbage is scanned or session is ended with 
+    the provided id*/
+router.get('/scan/:id', async function(req, res, next){
+
+  var id = req.params.id;
+
+  var data = WorkingBinSchema.find({_id: id});
+
+  data = data[0];
+
+  var something = await WorkingBinSchema.watch();
+
+  res.send(something);
 })
 
 

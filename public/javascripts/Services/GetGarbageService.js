@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var WasteSchema = require('../Models/WasteSchema');
+var WorkingBinSchema = require('../Models/WorkingBinSchema');
 
 module.exports = {
 
@@ -36,6 +37,13 @@ module.exports = {
             emptyPercentage: 0,
             isFull: false
         });
+
+        var newWasteWorkingBinStatus = new WorkingBinSchema({
+            _id: id, 
+            isWorking: false
+        })
+
+        await newWasteWorkingBinStatus.save();
 
         await newWaste.save();
 
