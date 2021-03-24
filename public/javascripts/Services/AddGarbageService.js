@@ -57,10 +57,8 @@ module.exports = {
                     glassCount: 0 }
         };
 
-        if(waste.filledCapacity==waste.totalCapacity - 1){
-            update = {
-                isFull: true
-            }
+        if(waste.filledCapacity + 1===waste.totalCapacity){
+            update.isFull =  true
         }
 
         switch(garbageType){
