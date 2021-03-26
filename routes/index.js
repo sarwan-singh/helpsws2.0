@@ -67,9 +67,11 @@ router.post('/addGarbage', async function(req, res, next){
 
 /*  To listen on if any garbage is scanned or session is ended with 
     the provided id*/
-router.post('/scan', async function(req, res, next){
+router.get('/scan/:id', async function(req, res, next){
 
-  var id = req.body.id;
+  var id = req.params.id; 
+
+  req.socket.setTimeout(2147483647)
 
   await ScanService.detectChange(id, res);
 
@@ -105,10 +107,10 @@ router.get('/addAccount/:email/:password/:name', async function(req, res, next){
 
 /*  To send a verification mail to the user's E-mail to complete
     user sign up*/
-router.get('/sendMail/:email/:name', async function(req, res, next){
-  var email = req.params.email;
+router.post('/sendMail', async function(req, res, next){
+  var email = req.body.email;
 
-  var name = req.params.name;
+  var name = req.body.name;
 
   LoginService.sendMail(name, email);
 
