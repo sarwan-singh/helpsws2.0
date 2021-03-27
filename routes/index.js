@@ -67,9 +67,9 @@ router.post('/addGarbage', async function(req, res, next){
 
 /*  To listen on if any garbage is scanned or session is ended with 
     the provided id*/
-router.get('/scan/:id', async function(req, res, next){
+router.post('/scan', async function(req, res, next){
 
-  var id = req.params.id; 
+  var id = req.body.id; 
 
   req.socket.setTimeout(2147483647)
 
@@ -93,12 +93,12 @@ router.post('/scanned', async function(req, res, next){
 
 /*  To create a new user with provided details in database or update
     if already exists with unverified email*/
-router.get('/addAccount/:email/:password/:name', async function(req, res, next){
-  var email = req.params.email;
+router.post('/addAccount', async function(req, res, next){
+  var email = req.body.email;
   
-  var name = req.params.name;
+  var name = req.body.name;
 
-  var password = req.params.password;
+  var password = req.body.password;
 
   var status = await LoginService.checkIfExists(name, email, password);
 
@@ -115,6 +115,44 @@ router.post('/sendMail', async function(req, res, next){
   LoginService.sendMail(name, email);
 
   res.send("Email sent...");
+})
+
+/*  To verify a user with provided encrypted email*/
+router.get('/verify/:email', async function(req, res, next){
+  var email = req.params.email;
+
+  await LoginService.verify(email);
+
+  res.send("<p>Your account has been verified. Click refresh on app to continue</p>");
+})
+
+/*  To check if a user is verified or not with provided email */
+router.post('/isverified', async function(req, res, next){
+  var email = req.body.email;
+
+  var status = await LoginService.isVerified(email);
+
+  res.send({status : status});
+})
+
+/*  To fetch any user's detail with provided email */
+router.post('/getuser', async function(req, res, next){
+  var email = req.body.email;
+
+  var data = await LoginService.getUser(email);
+
+  res.send(data);
+})
+
+/*  To login user with provided email and password */
+router.post('/login', async function(req, res, next){
+  var email = req.body.email;
+
+  var password = req.body.password;
+
+  var data = await LoginService.login(email, password);
+
+  res.send(data);
 })
 
 module.exports = router;

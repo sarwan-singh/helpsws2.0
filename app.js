@@ -7,8 +7,11 @@ var getSampleData =  require('./public/javascripts/Services/ConnectDB')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var cors = require('cors')
+var dotenv = require('dotenv')
 
 var app = express();
+
+dotenv.config();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
