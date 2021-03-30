@@ -4,16 +4,12 @@ var UserSchema = require('../Models/UserSchema');
 
 var SecurityService = require('../Services/SecurityService');
 
-async function getUser(email, password=true){
+async function getUser(email){
   var query = {
     email : email
   }
 
   var data = await UserSchema.find(query);
-
-  if(password==false){
-    data.password = ""
-  }
   
   return data;
 }
