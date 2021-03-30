@@ -19,13 +19,11 @@ function generateEmail(userName, email){
 }
 
 function generateMailOptions(userName, email){
-    email = SecurityService.encrypt(email);
-
     var mailOptions = {
         from: 'helpsws2.0@gmail.com',
         to: email,
         subject: 'Confirm your account on SWS',
-        html: generateEmail(userName, email)
+        html: generateEmail(userName, SecurityService.encrypt(email))
       };
       return mailOptions;
 }

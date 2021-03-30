@@ -117,7 +117,7 @@ router.post('/sendMail', async function(req, res, next){
   res.send("Email sent...");
 })
 
-/*  To verify a user with provided encrypted email*/
+/*  To verify a user with provided encrypted email.*/
 router.get('/verify/:email', async function(req, res, next){
   var email = req.params.email;
 
