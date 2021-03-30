@@ -93,12 +93,12 @@ router.post('/scanned', async function(req, res, next){
 
 /*  To create a new user with provided details in database or update
     if already exists with unverified email*/
-router.post('/addAccount', async function(req, res, next){
-  var email = req.body.email;
+router.get('/addAccount/:email/:name/:password', async function(req, res, next){
+  var email = req.params.email;
   
-  var name = req.body.name;
+  var name = req.params.name;
 
-  var password = req.body.password;
+  var password = req.params.password;
 
   var status = await LoginService.checkIfExists(name, email, password);
 
