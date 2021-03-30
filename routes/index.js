@@ -139,7 +139,7 @@ router.post('/isverified', async function(req, res, next){
 router.post('/getuser', async function(req, res, next){
   var email = req.body.email;
 
-  var data = await LoginService.getUser(email);
+  var data = await LoginService.getUser(email, false);
 
   res.send(data);
 })
