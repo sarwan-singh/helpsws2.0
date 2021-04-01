@@ -64,7 +64,7 @@ router.post('/scan', async function(req, res, next){
 
   var id = req.body.id; 
 
-  req.setTimeout(0);
+  req.setTimeout(500000);
 
   res.status = 200;
 
