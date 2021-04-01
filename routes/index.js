@@ -66,6 +66,8 @@ router.post('/scan', async function(req, res, next){
 
   req.socket.setTimeout(2147483647)
 
+  res.status = 200;
+
   await ScanService.detectChange(id, res);
 
 })
@@ -149,14 +151,5 @@ router.post('/login', async function(req, res, next){
 
   res.send(data);
 })
-
-/*  This part is now done by using kaffeine heroku.*/
-// /*  To make API run 24/7. */
-// const job = schedule.scheduleJob('0/20 * * * *',async function(){
-//   request.get('https://helpsws.herokuapp.com/').then(function(body){
-//     console.log("API TRIGGERED");
-//   })
-// });
-
 
 module.exports = router;
