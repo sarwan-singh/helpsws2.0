@@ -1,13 +1,18 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+var http = require('http');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var getSampleData =  require('./public/javascripts/Services/ConnectDB')
 var indexRouter = require('./routes/index');
+var scanRouter = require('./routes/scan');
 var usersRouter = require('./routes/users');
+var authenticationRouter = require('./routes/authentication');
+var garbageRouter = require('./routes/garbage');
 var cors = require('cors')
 var dotenv = require('dotenv')
+var server = http.createServer()
 
 var app = express();
 
@@ -25,6 +30,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/', scanRouter);
+app.use('/', authenticationRouter);
+app.use('/', garbageRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler

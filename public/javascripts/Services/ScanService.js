@@ -28,7 +28,6 @@ module.exports = {
           }
         })
 
-
     },
 
     changeData : async function(id, wasteStatus){
