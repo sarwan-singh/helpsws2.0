@@ -2,10 +2,6 @@ var mongoose = require('mongoose');
 var WasteSchema = require('../Models/WasteSchema');
 var WorkingBinSchema = require('../Models/WorkingBinSchema');
 
-function returnError(res){
-  
-}
-
 module.exports = {
 
     getData : async function(id){

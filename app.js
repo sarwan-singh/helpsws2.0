@@ -10,6 +10,8 @@ var scanRouter = require('./routes/scan');
 var usersRouter = require('./routes/users');
 var authenticationRouter = require('./routes/authentication');
 var garbageRouter = require('./routes/garbage');
+var userDataRouter = require('./routes/userData');
+var sentenceRouter = require('./routes/sentences');
 var cors = require('cors')
 var dotenv = require('dotenv')
 var server = http.createServer()
@@ -33,7 +35,9 @@ app.use('/', indexRouter);
 app.use('/', scanRouter);
 app.use('/', authenticationRouter);
 app.use('/', garbageRouter);
+app.use('/', userDataRouter);
 app.use('/users', usersRouter);
+app.use('/', sentenceRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
