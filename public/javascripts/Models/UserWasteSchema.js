@@ -1,9 +1,8 @@
 var mongoose=require('mongoose'); 
   
 var UserWasteSchema = new mongoose.Schema({ 
-    date: Date, 
     email: String,
-    filledCapacity: Number,
+    totalWaste: Number,
     paperCount: Number,
     plasticCount: Number,
     glassCount: Number,

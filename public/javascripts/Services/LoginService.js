@@ -1,6 +1,7 @@
 var nodemailer = require('nodemailer');
 
 var UserSchema = require('../Models/UserSchema');
+var UserWasteSchema = require('../Models/UserWasteSchema');
 
 var SecurityService = require('../Services/SecurityService');
 
@@ -35,6 +36,25 @@ var transporter = nodemailer.createTransport({
       pass: 'Qwerty@123'
     }
   });
+
+async function makeStartingUserData(email){
+  var startingUserData = new UserWasteSchema({
+    email: email,
+    totalWaste: 0,
+    paperCount: 0,
+    plasticCount: 0,
+    glassCount: 0,
+    metalCount: 0,
+    bioCount: 0,
+    paperPercentage: 0,
+    plasticPercentage: 0,
+    glassPercentage: 0,
+    metalPercentage: 0,
+    bioPercentage: 0
+  });
+
+  await startingUserData.save();
+}
 
 module.exports = {
 
@@ -102,7 +122,7 @@ module.exports = {
           }
 
           await UserSchema.findOneAndUpdate(query, update);
-
+          
           return true;
 
       }else{
@@ -149,6 +169,8 @@ module.exports = {
       user = user[0];
 
       user.verified = true;
+
+      await makeStartingUserData(email);
 
       await UserSchema.findOneAndUpdate(query, user);
     },

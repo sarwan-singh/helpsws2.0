@@ -15,22 +15,31 @@ function roundToTwo(num) {
 
 module.exports = {
 
-    updateData : async function(email, start, end){
+    updateData : async function(email, start, end, res){
         var query = {
-            email : email,
-            date : getCurrentDate()
+            email : email
+        }
+
+        if(email.trim()===""){
+            return res.send("please provide email");
         }
 
         var userData = UserWasteSchema.find(query);
 
-        userData.filledCapacity += end.filledCapacity - start.filledCapacity;
+        if(userData.length===0){
+            return res.send("wrong email address");
+        }
+
+        userData = userData[0];
+
+        userData.totalWaste += end.totalWaste - start.totalWaste;
         userData.paperCount += end.paperCount - start.paperCount;
         userData.plasticCount += end.plasticCount - start.plasticCount;
         userData.glassCount += end.glassCount - start.glassCount;
         userData.metalCount += end.metalCount - start.metalCount;
         userData.bioCount += end.bioCount - start.bioCount;
 
-        var formula = 100/userData.filledCapacity;
+        var formula = 100/userData.totalWaste;
 
         userData.paperPercentage = roundToTwo(userData.paperPercentage * formula) ;
         userData.plasticPercentage =  roundToTwo(userData.plasticPercentage * formula) ;
@@ -38,7 +47,20 @@ module.exports = {
         userData.metalPercentage  = roundToTwo(userData.metalPercentage * formula) ;
         userData.bioPercentage  = roundToTwo(userData.bioPercentage * formula) ;
 
-        return await UserWasteSchema.findOneAndUpdate(query, userData, {new : true});
+        await UserWasteSchema.findOneAndUpdate(query, userData, {new : true});
+        
+        return res.send("Data updated successfully");
+    
+    }, 
+
+    getUserData :  async function(email, res){
+        var query = {
+            email  : email
+        }
+
+        var user = await UserWasteSchema.find(query);
+
+        return res.send(user[0]);
     }
 
 }
