@@ -22,7 +22,7 @@ router.post('/getSentence', async function(req, res, next){
 
     var sentence = await SentenceService.getSentences(type);
 
-    res.send(sentence);
+    res.send({sentences : sentence});
 }) 
 
 module.exports = router;
