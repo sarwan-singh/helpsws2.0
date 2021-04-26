@@ -272,12 +272,14 @@
                   {
                     "name": "sentence",
                     "in": "body",
-                    "description": "Quote/Fact sentence"
+                    "description": "Quote/Fact sentence", 
+                    "type":"string"
                   },
                   {
                     "name": "type",
                     "in": "body",
-                    "description": "Type of sentence(Quote/Fact)"
+                    "description": "Type of sentence(Quote/Fact)",
+                    "type":"string"
                   }
               ],
               "responses":{
