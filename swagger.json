@@ -1,0 +1,356 @@
+{
+  "swagger": "2.0",
+    "info": {
+        "title": "Smart Waste Segregator",
+        "description" : "Smart Waste Segregator API information",
+        "contact" : {
+        "name" : "SWS Team",
+        "email" : "helpsws2.0@gmail.com",
+        "url" : "https://smartwastesegregator.netlify.app/"
+        },
+        "servers": [
+        {
+            "url" : "http://localhost:7000",
+            "description" : "Local Server"
+        },
+        {
+            "url" : "https://helpsws.herokuapp.com/",
+            "description" : "Production Server"
+        }
+        ]
+    }
+  ,
+  "tags": [
+    {
+        "name": "Authentication",
+        "description": "API for authentication services"
+    },
+    {
+        "name": "Home",
+        "description": "API for Home page"
+    },
+    {
+        "name": "Garbage",
+        "description": "API for garbage related services"
+    },
+    {
+        "name": "Scan",
+        "description": "API for scanning services"
+    },
+    {
+        "name": "Sentence",
+        "description": "API for sentences services"
+    },
+    {
+        "name": "UserData",
+        "description": "API for user's data services"
+    }
+  ],
+  "apis" : ["./routes/*.js"],
+  "paths": {
+      "/":{
+        "get":{
+            "summary":"Home page",
+            "tags": ["Home"],
+            "responses":{
+                "200":{
+                    "description":"OK"
+                }
+            }
+        }
+      },
+      "/addAcount": {
+          "post":{
+                "summary":"To create a new user with provided details in database or update if already exists with unverified email",
+                "tags": ["Authentication"],
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "body",
+                        "description": "User's Email"
+                    },
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "description": "User's name"
+                    },
+                    {
+                        "name": "password",
+                        "in": "body",
+                        "description": "User's password"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                    }
+                }
+          }
+      },
+      "/sendMail": {
+        "post":{
+              "summary":"To send a verification mail to the user's E-mail to complete user sign up",
+              "tags": ["Authentication"],
+              "parameters": [
+                  {
+                      "name": "email",
+                      "in": "body",
+                      "description": "User's Email"
+                  },
+                  {
+                      "name": "name",
+                      "in": "body",
+                      "description": "User's name"
+                  }
+              ],
+              "responses":{
+                  "200":{
+                      "description":"OK"
+                  }
+              }
+        }
+    },
+    "/isVerified": {
+        "post":{
+              "summary":"To check if a user is verified or not with provided email",
+              "tags": ["Authentication"],
+              "parameters": [
+                  {
+                      "name": "email",
+                      "in": "body",
+                      "description": "User's Email"
+                  }
+              ],
+              "responses":{
+                  "200":{
+                      "description":"OK"
+                  }
+              }
+        }
+    },
+    "/getUser": {
+        "post":{
+              "summary":"To fetch any user's detail with provided email",
+              "tags": ["Authentication"],
+              "parameters": [
+                  {
+                      "name": "email",
+                      "in": "body",
+                      "description": "User's Email"
+                  }
+              ],
+              "responses":{
+                  "200":{
+                      "description":"OK"
+                  }
+              }
+        }
+    },
+    "/login": {
+        "post":{
+              "summary":"To login user with provided email and password",
+              "tags": ["Authentication"],
+              "parameters": [
+                  {
+                      "name": "email",
+                      "in": "body",
+                      "description": "User's Email"
+                  },
+                  {
+                      "name": "password",
+                      "in": "body",
+                      "description": "User's password"
+                  }
+              ],
+              "responses":{
+                  "200":{
+                      "description":"OK"
+                  }
+              }
+        }
+    },
+    "/verify/{email}": {
+        "get":{
+              "summary":"To verify a user with provided encrypted email",
+              "tags": ["Authentication"],
+              "parameters": [
+                  {
+                      "name": "email",
+                      "in": "path",
+                      "description": "User's encrypted Email"
+                  }
+              ],
+              "responses":{
+                  "200":{
+                      "description":"OK"
+                  }
+              }
+        }
+    },
+    "/id": {
+        "post":{
+              "summary":"To fetch a Garbage with provided id. If it doesn't exist make a new one.",
+              "tags": ["Garbage"],
+              "parameters": [
+                  {
+                      "name": "id",
+                      "in": "body",
+                      "description": "Bin Id"
+                  }
+              ],
+              "responses":{
+                  "200":{
+                      "description":"OK"
+                  }
+              }
+        }
+    },
+    "/addGarbage": {
+        "post":{
+              "summary":"To add a new garbage type in garbage with provided id and garbage type.",
+              "tags": ["Garbage"],
+              "parameters": [
+                  {
+                      "name": "id",
+                      "in": "body",
+                      "description": "Bin Id"
+                  },
+                  {
+                      "name": "type",
+                      "in": "body",
+                      "description": "Garbage Type"
+                  }
+              ],
+              "responses":{
+                  "200":{
+                      "description":"OK"
+                  }
+              }
+        }
+    },
+    "/scan": {
+        "post":{
+              "summary":"To listen on if any garbage is scanned or session is ended with the provided id",
+              "tags": ["Scan"],
+              "parameters": [
+                  {
+                      "name": "id",
+                      "in": "body",
+                      "description": "Bin Id"
+                  }
+              ],
+              "responses":{
+                  "200":{
+                      "description":"OK"
+                  }
+              }
+        }
+    },
+    "/scanned": {
+        "post":{
+              "summary":"To change status of scan from frontend app so that it could be detected on machine",
+              "tags": ["Scan"],
+              "parameters": [
+                  {
+                      "name": "id",
+                      "in": "body",
+                      "description": "Bin Id"
+                  }
+              ],
+              "responses":{
+                  "200":{
+                      "description":"OK"
+                  }
+              }
+        }
+    },
+    "/addSentence": {
+        "post":{
+              "summary":"To add a fact or quote on the basis of its type",
+              "tags": ["Sentence"],
+              "parameters": [
+                  {
+                    "name": "sentence",
+                    "in": "body",
+                    "description": "Quote/Fact sentence"
+                  },
+                  {
+                    "name": "type",
+                    "in": "body",
+                    "description": "Type of sentence(Quote/Fact)"
+                  }
+              ],
+              "responses":{
+                  "200":{
+                      "description":"OK"
+                  }
+              }
+        }
+    },
+    "/getSentence": {
+        "post":{
+              "summary":"To fetch facts or quotes on the basis of type",
+              "tags": ["Sentence"],
+              "parameters": [
+                  {
+                    "name": "type",
+                    "in": "body",
+                    "description": "Type of sentence(Quote/Fact)"
+                  }
+              ],
+              "responses":{
+                  "200":{
+                      "description":"OK"
+                  }
+              }
+        }
+    },
+    "/updateUserData": {
+        "post":{
+              "summary":"Update user data on the basis of start and end data of bin with email of user",
+              "tags": ["UserData"],
+              "parameters": [
+                  {
+                    "name": "start",
+                    "in": "body",
+                    "description": "Start data of bin"
+                  },
+                  {
+                    "name": "end",
+                    "in": "body",
+                    "description": "End data of bin"
+                  },
+                  {
+                    "name": "email",
+                    "in": "body",
+                    "description": "Email of user"
+                  }
+              ],
+              "responses":{
+                  "200":{
+                      "description":"OK"
+                  }
+              }
+        }
+    },
+    "/userData": {
+        "post":{
+              "summary":"Fetch user data on the basis of email of user",
+              "tags": ["UserData"],
+              "parameters": [
+                  {
+                    "name": "email",
+                    "in": "body",
+                    "description": "Email of user"
+                  }
+              ],
+              "responses":{
+                  "200":{
+                      "description":"OK"
+                  }
+              }
+        }
+    }
+
+  }
+}

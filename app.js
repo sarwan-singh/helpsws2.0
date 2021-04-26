@@ -14,16 +14,23 @@ var userDataRouter = require('./routes/userData');
 var sentenceRouter = require('./routes/sentences');
 var cors = require('cors')
 var dotenv = require('dotenv')
-var server = http.createServer()
+var swaggerUi = require('swagger-ui-express');
+const swaggerJSDoc = require('swagger-jsdoc');
 
 var app = express();
 
 dotenv.config();
 
+const swaggerDocument = require('./swagger.json');
+
+// const swaggerDocs = swaggerJSDoc(swaggerOptions);
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
