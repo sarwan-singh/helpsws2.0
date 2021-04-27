@@ -1,4 +1,5 @@
 var UserWasteSchema = require('../Models/UserWasteSchema');
+var ScanService = require('../public/javascripts/Services/ScanService');
 
 function getCurrentDate(){
     var today = new Date();
@@ -30,6 +31,8 @@ module.exports = {
             return res.send("wrong email address");
         }
 
+        var binId = start._id;
+
         userData = userData[0];
 
         userData.totalWaste += end.totalWaste - start.totalWaste;
@@ -48,6 +51,10 @@ module.exports = {
         userData.bioPercentage  = roundToTwo(userData.bioPercentage * formula) ;
 
         await UserWasteSchema.findOneAndUpdate(query, userData, {new : true});
+
+        var wasteStatus = await ScanService.getData(binId);
+
+        var data = await ScanService.changeData(binId, wasteStatus);
         
         return res.send("Data updated successfully");
     
