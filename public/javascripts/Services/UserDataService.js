@@ -1,5 +1,5 @@
 var UserWasteSchema = require('../Models/UserWasteSchema');
-var ScanService = require('../public/javascripts/Services/ScanService');
+var ScanService = require('./ScanService');
 
 function getCurrentDate(){
     var today = new Date();
