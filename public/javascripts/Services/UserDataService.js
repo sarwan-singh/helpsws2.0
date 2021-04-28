@@ -54,6 +54,8 @@ module.exports = {
 
         var wasteStatus = await ScanService.getData(binId);
 
+        console.log("id is  = > " + binId);
+
         console.log(wasteStatus);
 
         var data = await ScanService.changeData(binId, wasteStatus);
