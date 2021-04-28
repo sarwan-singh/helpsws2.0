@@ -44,19 +44,19 @@ module.exports = {
 
         var formula = 100/userData.totalWaste;
 
-        userData.paperPercentage = roundToTwo(userData.paperPercentage * formula) ;
-        userData.plasticPercentage =  roundToTwo(userData.plasticPercentage * formula) ;
-        userData.glassPercentage = roundToTwo(userData.glassPercentage * formula) ;
-        userData.metalPercentage  = roundToTwo(userData.metalPercentage * formula) ;
-        userData.bioPercentage  = roundToTwo(userData.bioPercentage * formula) ;
+        console.log(formula);
+
+        userData.paperPercentage = roundToTwo(userData.paperCount * formula) ;
+        userData.plasticPercentage =  roundToTwo(userData.plasticCount * formula) ;
+        userData.glassPercentage = roundToTwo(userData.glassCount * formula) ;
+        userData.metalPercentage  = roundToTwo(userData.metalCount * formula) ;
+        userData.bioPercentage  = roundToTwo(userData.bioCount * formula) ;
+
+        console.log(userData);
 
         await UserWasteSchema.findOneAndUpdate(query, userData, {new : true});
 
         var wasteStatus = await ScanService.getData(binId);
-
-        console.log("id is  = > " + binId);
-
-        console.log(start);
 
         var data = await ScanService.changeData(binId, wasteStatus);
         
