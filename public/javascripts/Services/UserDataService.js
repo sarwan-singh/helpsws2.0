@@ -36,7 +36,7 @@ module.exports = {
         userData = userData[0];
         console.log(userData)
 
-        userData.totalWaste += end.totalWaste - start.totalWaste;
+        userData.totalWaste += end.filledCapacity - start.filledCapacity;
         userData.paperCount += end.paperCount - start.paperCount;
         userData.plasticCount += end.plasticCount - start.plasticCount;
         userData.glassCount += end.glassCount - start.glassCount;
