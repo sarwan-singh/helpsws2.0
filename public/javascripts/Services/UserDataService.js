@@ -47,19 +47,11 @@ module.exports = {
 
         var formula = 100/userData.totalWaste;
 
-        console.log(formula);
-
         userData.paperPercentage = roundToTwo(userData.paperCount * formula) ;
         userData.plasticPercentage =  roundToTwo(userData.plasticCount * formula) ;
         userData.glassPercentage = roundToTwo(userData.glassCount * formula) ;
         userData.metalPercentage  = roundToTwo(userData.metalCount * formula) ;
         userData.bioPercentage  = roundToTwo(userData.bioCount * formula) ;
-
-        console.log(start._id);
-
-        console.log(email);
-        console.log(start);
-        console.log(end);
 
         await UserWasteSchema.findOneAndUpdate(query, userData, {new : true});
 
