@@ -34,7 +34,6 @@ module.exports = {
         var binId = start._id;
 
         userData = userData[0];
-        console.log(userData)
 
         userData.totalWaste += end.filledCapacity - start.filledCapacity;
         userData.paperCount += end.paperCount - start.paperCount;
@@ -54,6 +53,8 @@ module.exports = {
         await UserWasteSchema.findOneAndUpdate(query, userData, {new : true});
 
         var wasteStatus = await ScanService.getData(binId);
+
+        console.log(wasteStatus);
 
         var data = await ScanService.changeData(binId, wasteStatus);
         
