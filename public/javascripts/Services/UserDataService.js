@@ -20,8 +20,8 @@ module.exports = {
         var query = {
             email : email
         }
-        start = JSON.stringify(start);
-        end = JSON.stringify(end);
+        start = start.json();
+        end = end.json();
 
         if(email.trim()===""){
             return res.send("please provide email");
