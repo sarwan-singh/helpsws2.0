@@ -56,6 +56,10 @@ module.exports = {
 
         console.log(email);
         console.log(start);
+
+        for(var i in start){
+            console.log(start[i]);
+        }
         console.log(end);
 
         await UserWasteSchema.findOneAndUpdate(query, userData, {new : true});
