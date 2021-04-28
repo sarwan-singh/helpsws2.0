@@ -25,7 +25,7 @@ module.exports = {
             return res.send("please provide email");
         }
 
-        var userData = UserWasteSchema.find(query);
+        var userData = await UserWasteSchema.find(query);
 
         if(userData.length===0){
             return res.send("wrong email address");
