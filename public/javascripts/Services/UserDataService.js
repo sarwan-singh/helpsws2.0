@@ -52,7 +52,9 @@ module.exports = {
         userData.metalPercentage  = roundToTwo(userData.metalCount * formula) ;
         userData.bioPercentage  = roundToTwo(userData.bioCount * formula) ;
 
-        console.log(userData);
+        console.log(email);
+        console.log(start);
+        console.log(end);
 
         await UserWasteSchema.findOneAndUpdate(query, userData, {new : true});
 
