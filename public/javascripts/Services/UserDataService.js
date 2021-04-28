@@ -21,6 +21,9 @@ module.exports = {
             email : email
         }
 
+        start = JSON.parse(start);
+        end = JSON.parse(end);
+
         if(email.trim()===""){
             return res.send("please provide email");
         }
@@ -56,10 +59,6 @@ module.exports = {
 
         console.log(email);
         console.log(start);
-
-        for(var i in start){
-            console.log(start[i]);
-        }
         console.log(end);
 
         await UserWasteSchema.findOneAndUpdate(query, userData, {new : true});
