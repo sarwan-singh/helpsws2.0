@@ -34,6 +34,7 @@ module.exports = {
         var binId = start._id;
 
         userData = userData[0];
+        console.log(userData)
 
         userData.totalWaste += end.totalWaste - start.totalWaste;
         userData.paperCount += end.paperCount - start.paperCount;
