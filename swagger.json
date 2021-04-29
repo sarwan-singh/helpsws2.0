@@ -59,7 +59,7 @@
             }
         }
       },
-      "/addAcount": {
+      "/addAccount": {
           "post":{
                 "summary":"To create a new user with provided details in database or update if already exists with unverified email",
                 "tags": ["Authentication"],
