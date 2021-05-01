@@ -21,7 +21,13 @@ router.post('/updateUserData', async function(req, res, next) {
 router.post('/userData', async function(req, res, next){
     var email = req.body.email;
 
-    await UserDataService.getUserData(email, res);
+    var days = req.body.days;
+
+    if(days===undefined){
+        days = -1;
+    }
+
+    await UserDataService.getUserData(email, res, days);
 })
 
 router.get('/createDataForNewDay', async function(req, res, next){

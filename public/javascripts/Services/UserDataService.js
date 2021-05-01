@@ -97,12 +97,17 @@ module.exports = {
             date : Functions.convertDate(0)
         }
 
+
         var query2 = {
             email : email,
             date : Functions.convertDate(-days)
         }
 
         var user1 = await UserWasteSchema.find(query1);
+
+        if(days===-1){
+            return user1[0];
+        }
 
         var user2 = await UserWasteSchema.find(query2);
         
