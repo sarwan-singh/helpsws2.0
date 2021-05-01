@@ -148,8 +148,6 @@ module.exports = {
 
     createAccount : async function(name, email, password){
 
-      password = SecurityService.encrypt(password);
-
       var newUser = new UserSchema({
         name: name,
         email: email, 

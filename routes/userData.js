@@ -28,6 +28,4 @@ router.get('/createDataForNewDay', async function(req, res, next){
     await UserDataService.newDayData(res);
 })
 
-
-
 module.exports = router;
