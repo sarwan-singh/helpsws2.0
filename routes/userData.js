@@ -32,6 +32,7 @@ router.post('/userData', async function(req, res, next){
     await UserDataService.getUserData(email, res, days);
 })
 
+/* Adds all user's data for new day. */
 router.get('/createDataForNewDay', async function(req, res, next){
     await UserDataService.newDayData(res);
 })

@@ -352,6 +352,17 @@
                   }
               }
         }
+    },
+    "/createDataForNewDay": {
+        "get":{
+              "summary":"Adds all user's data for new day",
+              "tags": ["UserData"],
+              "responses":{
+                  "200":{
+                      "description":"OK"
+                  }
+              }
+        }
     }
 
   }
