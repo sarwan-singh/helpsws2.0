@@ -71,25 +71,25 @@ module.exports = {
 
     login : async function(email, password){
 
-      var result = {status : "user login successful"}
+      var result = {status : "User login successful"}
 
       var data = await getUser(email);
 
 
       if(data.length==0){
-        result.status = "wrong email or password";
+        result.status = "Wrong email or password";
         return result;
       }
 
       var dbPassword = SecurityService.decrypt(data[0].password);
 
       if(password!=dbPassword){
-        result.status = "wrong email or password";
+        result.status = "Wrong email or password";
         return result;
       }
 
       if(data[0].verified==false){
-        result.status = "user is not verified";
+        result.status = "User is not verified";
         return result;
       }
 
