@@ -1,24 +1,18 @@
 var UserWasteSchema = require('../Models/UserWasteSchema');
 var ScanService = require('./ScanService');
-
-function getCurrentDate(){
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); 
-    var yyyy = today.getFullYear();
-    today = dd + '-' + mm + '-' + yyyy;
-    return today;
-}
+var Functions = require('../Functions');
+const UserSchema = require('../Models/UserSchema');
 
 function roundToTwo(num) {    
-    return +(Math.round(num + "e+2")  + "e-2");
+    return +(Math.round(num + "e+2") + "e-2");
 }
 
 module.exports = {
 
     updateData : async function(email, start, end, res){
         var query = {
-            email : email
+            email : email,
+            date: Functions.convertDate(0)
         }
 
         start = JSON.parse(start);
@@ -54,7 +48,7 @@ module.exports = {
         userData.bioPercentage  = roundToTwo(userData.bioCount * formula) ;
 
         await UserWasteSchema.findOneAndUpdate(query, userData, {new : true});
-
+        
         var wasteStatus = await ScanService.getData(binId);
 
         var data = await ScanService.changeData(binId, wasteStatus);
@@ -63,14 +57,56 @@ module.exports = {
     
     }, 
 
-    getUserData :  async function(email, res){
-        var query = {
-            email  : email
+    newDayData : async function(res){
+
+        var users = await UserSchema.find();
+
+        for(var i = 0;i<users.length;i++){
+            var testQuery = {
+                email: users[i].email,
+                date: Functions.convertDate(0)
+            }
+
+            var testUserData = await UserWasteSchema.find(testQuery);
+
+            if(testUserData.length===0){
+                var query = {
+                    email: users[i].email,
+                    date: Functions.convertDate(-1)
+                }
+
+                var prevUserData = await UserWasteSchema.find(query);
+
+                prevUserData = prevUserData[0];
+
+                prevUserData.date = Functions.convertDate(0);
+
+                prevUserData.save();
+            }
+
         }
 
-        var user = await UserWasteSchema.find(query);
+        res.send("All Users new data created");
+    },
 
-        return res.send(user[0]);
+    getUserData :  async function(email, res, days){
+        var query1 = {
+            email  : email,
+            date : Functions.convertDate(0)
+        }
+
+        var query2 = {
+            email : email,
+            date : Functions.convertDate(-days)
+        }
+
+        var user1 = await UserWasteSchema.find(query1);
+
+        var user2 = await UserWasteSchema.find(query2);
+        
+        var userFinal = Functions.calculateUserData(user1, user2);
+
+        return res.send(userFinal);
     }
 
 }

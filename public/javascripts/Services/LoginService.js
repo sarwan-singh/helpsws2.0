@@ -2,6 +2,7 @@ var nodemailer = require('nodemailer');
 
 var UserSchema = require('../Models/UserSchema');
 var UserWasteSchema = require('../Models/UserWasteSchema');
+var Functions = require('../Functions');
 
 var SecurityService = require('../Services/SecurityService');
 
@@ -46,6 +47,7 @@ async function makeStartingUserData(email){
   if(existing.length===0){
     
     var startingUserData = new UserWasteSchema({
+      date: Functions.convertDate(0),
       email: email,
       totalWaste: 0,
       paperCount: 0,
@@ -57,7 +59,8 @@ async function makeStartingUserData(email){
       plasticPercentage: 0,
       glassPercentage: 0,
       metalPercentage: 0,
-      bioPercentage: 0
+      bioPercentage: 0,
+      day: 0
     });
 
     await startingUserData.save();
@@ -126,7 +129,8 @@ module.exports = {
             email : email,
             name : name, 
             password : password,
-            verified : false
+            verified : false,
+            started: Functions.convertDate(0)
           }
 
           await UserSchema.findOneAndUpdate(query, update);
@@ -150,7 +154,8 @@ module.exports = {
         name: name,
         email: email, 
         password: password, 
-        verified: false
+        verified: false,
+        date: Functions.convertDate(0)
       })
 
       newUser.save();
@@ -178,6 +183,10 @@ module.exports = {
 
       user.verified = true;
 
+      user.started = Functions.convertDate(0);
+
+      user.day = 1;
+
       await makeStartingUserData(email);
 
       await UserSchema.findOneAndUpdate(query, user);
@@ -192,8 +201,5 @@ module.exports = {
       return data[0];
 
     }
-
-
-
 
 }

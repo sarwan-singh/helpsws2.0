@@ -24,6 +24,10 @@ router.post('/userData', async function(req, res, next){
     await UserDataService.getUserData(email, res);
 })
 
+router.get('/createDataForNewDay', async function(req, res, next){
+    await UserDataService.newDayData(res);
+})
+
 
 
 module.exports = router;

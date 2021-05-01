@@ -2,6 +2,7 @@ var mongoose=require('mongoose');
   
 var UserWasteSchema = new mongoose.Schema({ 
     email: String,
+    date: Date,
     totalWaste: Number,
     paperCount: Number,
     plasticCount: Number,
@@ -12,7 +13,8 @@ var UserWasteSchema = new mongoose.Schema({
     plasticPercentage: Number,
     glassPercentage: Number,
     metalPercentage: Number,
-    bioPercentage: Number
+    bioPercentage: Number,
+    day: Number
 }); 
   
 module.exports = mongoose.model( 
