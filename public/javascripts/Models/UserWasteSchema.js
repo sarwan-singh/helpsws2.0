@@ -14,7 +14,7 @@ var UserWasteSchema = new mongoose.Schema({
     glassPercentage: Number,
     metalPercentage: Number,
     bioPercentage: Number,
-    day: Number
+    days: Number
 }); 
   
 module.exports = mongoose.model( 

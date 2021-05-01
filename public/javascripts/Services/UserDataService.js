@@ -79,6 +79,8 @@ module.exports = {
 
                 prevUserData = prevUserData[0];
 
+                prevUserData.days++;
+
                 prevUserData.date = Functions.convertDate(0);
 
                 prevUserData.save();

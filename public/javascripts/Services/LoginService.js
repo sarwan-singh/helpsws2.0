@@ -41,7 +41,7 @@ var transporter = nodemailer.createTransport({
 async function makeStartingUserData(email){
   var query = {
     email : email
-  }
+  } 
 
   var existing = await UserWasteSchema.find(query);
   if(existing.length===0){
@@ -60,7 +60,7 @@ async function makeStartingUserData(email){
       glassPercentage: 0,
       metalPercentage: 0,
       bioPercentage: 0,
-      day: 0
+      days: 1
     });
 
     await startingUserData.save();
@@ -74,6 +74,7 @@ module.exports = {
       var result = {status : "user login successful"}
 
       var data = await getUser(email);
+
 
       if(data.length==0){
         result.status = "wrong email or password";
@@ -138,7 +139,6 @@ module.exports = {
           return true;
 
       }else{
-        console.log("new user" ,user);
         this.createAccount(name, email, password);
         return true;
       }
@@ -155,10 +155,10 @@ module.exports = {
         email: email, 
         password: password, 
         verified: false,
-        date: Functions.convertDate(0)
+        started: Functions.convertDate(0)
       })
 
-      newUser.save();
+      await newUser.save();
 
     },
 
@@ -184,8 +184,6 @@ module.exports = {
       user.verified = true;
 
       user.started = Functions.convertDate(0);
-
-      user.day = 1;
 
       await makeStartingUserData(email);
 
