@@ -68,7 +68,6 @@ module.exports = {
             }
 
             var testUserData = await UserWasteSchema.find(testQuery);
-            console.log(testUserData);
             if(testUserData.length===0){
                 var query = {
                     email: users[i].email,
@@ -117,15 +116,13 @@ module.exports = {
         }
 
         var user1 = await UserWasteSchema.find(query1);
-        console.log(user1[0])
-        console.log(Functions.convertDate(0));
+
         if(days>=user1[0].days||days<0){
             return res.send(user1[0]);
         }
-        console.log(Functions.convertDate(-days));
         
         var user2 = await UserWasteSchema.find(query2);
-        console.log(user2[0]);
+
         var userFinal = Functions.calculateUserData(user1[0], user2[0]);
 
         return res.send(userFinal);
