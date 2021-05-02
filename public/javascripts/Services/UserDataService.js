@@ -64,26 +64,38 @@ module.exports = {
         for(var i = 0;i<users.length;i++){
             var testQuery = {
                 email: users[i].email,
-                date: Functions.convertDate(0)
+                date: Functions.convertDate(1)
             }
 
             var testUserData = await UserWasteSchema.find(testQuery);
-
+            console.log(testUserData);
             if(testUserData.length===0){
                 var query = {
                     email: users[i].email,
-                    date: Functions.convertDate(-1)
+                    date: Functions.convertDate(0)
                 }
 
                 var prevUserData = await UserWasteSchema.find(query);
 
                 prevUserData = prevUserData[0];
 
-                prevUserData.days++;
-
-                prevUserData.date = Functions.convertDate(0);
-
-                prevUserData.save();
+                var newUserData = await UserWasteSchema({
+                    date: Functions.convertDate(1),
+                    email: users[i].email,
+                    totalWaste: prevUserData.totalWaste,
+                    paperCount: prevUserData.paperCount,
+                    plasticCount: prevUserData.plasticCount,
+                    glassCount: prevUserData.glassCount,
+                    metalCount: prevUserData.metalCount,
+                    bioCount: prevUserData.bioCount,
+                    paperPercentage: prevUserData.paperPercentage,
+                    plasticPercentage: prevUserData.plasticPercentage,
+                    glassPercentage: prevUserData.glassPercentage,
+                    metalPercentage: prevUserData.metalPercentage,
+                    bioPercentage: prevUserData.bioPercentage,
+                    days: prevUserData.days+1
+                })
+                newUserData.save();
             }
 
         }
@@ -94,26 +106,26 @@ module.exports = {
     getUserData :  async function(email, res, days){
         var query1 = {
             email  : email,
-            date : Functions.convertDate(0)
+            date : Functions.convertDate(1)
         }
 
-        console.log(days);
-
+        days = parseInt(days)
 
         var query2 = {
             email : email,
-            date : Functions.convertDate(-days)
+            date : Functions.convertDate(-days+1)
         }
 
         var user1 = await UserWasteSchema.find(query1);
-
-        if(days===-1||days>=user1[0].day||days===undefined){
+        console.log(Functions.convertDate(-days+1));
+        
+        if(days===-1||days>=user1[0].days||days===undefined){
             return res.send(user1[0]);
         }
 
         var user2 = await UserWasteSchema.find(query2);
-        
-        var userFinal = Functions.calculateUserData(user1, user2);
+        console.log(user2[0]);
+        var userFinal = Functions.calculateUserData(user1[0], user2[0]);
 
         return res.send(userFinal);
     }

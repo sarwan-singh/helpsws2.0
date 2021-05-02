@@ -44,7 +44,7 @@ function convertDate(add)
   {
       mm='0'+mm;
   } 
-  var convertedDate = dd + '-' + mm +'-'+ yyyy; 
+  var convertedDate = mm + '-' + dd +'-'+ yyyy; 
   console.log(convertedDate);
   return convertedDate;
 }
@@ -52,23 +52,23 @@ function convertDate(add)
 function calculateUserData(user1, user2){
     var calculatedUser = user1;
 
-    calculatedUser.totalWaste = user1.filledCapacity - user2.filledCapacity;
+    calculatedUser.totalWaste = user1.totalWaste - user2.totalWaste;
     calculatedUser.paperCount = user1.paperCount - user2.paperCount;
     calculatedUser.plasticCount = user1.plasticCount - user2.plasticCount;
     calculatedUser.glassCount = user1.glassCount - user2.glassCount;
     calculatedUser.metalCount = user1.metalCount - user2.metalCount;
     calculatedUser.bioCount = user1.bioCount - user2.bioCount;
-    calculateUserData.day = user1.day - user2.day;
+    calculateUser.days = user1.days - user2.days;
 
-    var formula = 100/calculateUserData.totalWaste;
+    var formula = 100/calculateUser.totalWaste;
 
-    calculateUserData.paperPercentage = roundToTwo(calculateUserData.paperCount * formula) ;
-    calculateUserData.plasticPercentage =  roundToTwo(calculateUserData.plasticCount * formula) ;
-    calculateUserData.glassPercentage = roundToTwo(calculateUserData.glassCount * formula) ;
-    calculateUserData.metalPercentage  = roundToTwo(calculateUserData.metalCount * formula) ;
-    calculateUserData.bioPercentage  = roundToTwo(calculateUserData.bioCount * formula) ;
+    calculateUser.paperPercentage = roundToTwo(calculateUser.paperCount * formula) ;
+    calculateUser.plasticPercentage =  roundToTwo(calculateUser.plasticCount * formula) ;
+    calculateUser.glassPercentage = roundToTwo(calculateUser.glassCount * formula) ;
+    calculateUser.metalPercentage  = roundToTwo(calculateUser.metalCount * formula) ;
+    calculateUser.bioPercentage  = roundToTwo(calculateUser.bioCount * formula) ;
 
-    return calculateUserData;
+    return calculateUser;
 }
 
 module.exports = {getUrl, getConnectionParams, getUpdateAndCreate, convertDate, calculateUserData}
