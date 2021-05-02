@@ -118,6 +118,7 @@ module.exports = {
 
         var user1 = await UserWasteSchema.find(query1);
         console.log(user1[0])
+        console.log(Functions.convertDate(1));
         if(days>=user1[0].days||days<0){
             return res.send(user1[0]);
         }
