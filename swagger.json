@@ -344,6 +344,11 @@
                     "name": "email",
                     "in": "body",
                     "description": "Email of user"
+                  },
+                  {
+                    "name": "days",
+                    "in": "body",
+                    "description": "Number of days for which data is required(Optional)"
                   }
               ],
               "responses":{
