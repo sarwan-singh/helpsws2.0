@@ -32,7 +32,7 @@ function convertDate(add)
 {
   var date = new Date();
   date.setDate(new Date().getDate()+add);
-  var mm = date.getMonth()+1; 
+  var mm = date.getMonth(); 
   var yyyy = date.getFullYear();
   var dd = date.getDate();
   if(dd<10) 
@@ -44,7 +44,13 @@ function convertDate(add)
   {
       mm='0'+mm;
   } 
-  var convertedDate = mm + '-' + dd +'-'+ yyyy; 
+  var convertedDate = yyyy + '-' + mm +'-'+ dd; 
+
+  yyyy = parseInt(yyyy);
+  mm = parseInt(mm);
+  dd = parseInt(dd);
+
+  convertedDate = new Date(yyyy, mm, dd)
   return convertedDate;
 }
 
@@ -57,17 +63,21 @@ function calculateUserData(user1, user2){
     calculatedUser.glassCount = user1.glassCount - user2.glassCount;
     calculatedUser.metalCount = user1.metalCount - user2.metalCount;
     calculatedUser.bioCount = user1.bioCount - user2.bioCount;
-    calculateUser.days = user1.days - user2.days;
+    calculatedUser.days = user1.days - user2.days;
 
-    var formula = 100/calculateUser.totalWaste;
+    var formula = 0;
+    if(calculateUserData.totalWaste>0){
+        formula = 100/calculatedUser.totalWaste;
+    }
 
-    calculateUser.paperPercentage = roundToTwo(calculateUser.paperCount * formula) ;
-    calculateUser.plasticPercentage =  roundToTwo(calculateUser.plasticCount * formula) ;
-    calculateUser.glassPercentage = roundToTwo(calculateUser.glassCount * formula) ;
-    calculateUser.metalPercentage  = roundToTwo(calculateUser.metalCount * formula) ;
-    calculateUser.bioPercentage  = roundToTwo(calculateUser.bioCount * formula) ;
 
-    return calculateUser;
+    calculatedUser.paperPercentage = roundToTwo(calculatedUser.paperCount * formula) ;
+    calculatedUser.plasticPercentage =  roundToTwo(calculatedUser.plasticCount * formula) ;
+    calculatedUser.glassPercentage = roundToTwo(calculatedUser.glassCount * formula) ;
+    calculatedUser.metalPercentage  = roundToTwo(calculatedUser.metalCount * formula) ;
+    calculatedUser.bioPercentage  = roundToTwo(calculatedUser.bioCount * formula) ;
+
+    return calculatedUser;
 }
 
 module.exports = {getUrl, getConnectionParams, getUpdateAndCreate, convertDate, calculateUserData}
