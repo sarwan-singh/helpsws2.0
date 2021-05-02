@@ -12,6 +12,7 @@ var authenticationRouter = require('./routes/authentication');
 var garbageRouter = require('./routes/garbage');
 var userDataRouter = require('./routes/userData');
 var sentenceRouter = require('./routes/sentences');
+var userTrackRouter = require('./routes/userTrack');
 var cors = require('cors')
 var dotenv = require('dotenv')
 var swaggerUi = require('swagger-ui-express');
@@ -45,6 +46,7 @@ app.use('/', garbageRouter);
 app.use('/', userDataRouter);
 app.use('/users', usersRouter);
 app.use('/', sentenceRouter);
+app.use('/', userTrackRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

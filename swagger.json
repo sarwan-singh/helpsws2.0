@@ -44,6 +44,10 @@
     {
         "name": "UserData",
         "description": "API for user's data services"
+    },
+    {
+        "name": "UserTrack",
+        "description": "API for user's tracked data services"
     }
   ],
   "apis" : ["./routes/*.js"],
@@ -362,6 +366,47 @@
         "get":{
               "summary":"Adds all user's data for new day",
               "tags": ["UserData"],
+              "responses":{
+                  "200":{
+                      "description":"OK"
+                  }
+              }
+        }
+    },
+    "/updateUserTrack": {
+        "post":{
+              "summary":"Update user track(recycled/scanned) on the basis of email and type of task",
+              "tags": ["UserTrack"],
+              "parameters": [
+                    {
+                    "name": "email",
+                    "in": "body",
+                    "description": "Email of user"
+                    },
+                    {
+                    "name": "task",
+                    "in": "body",
+                    "description": "Task to increment(recycled/scanned)"
+                    }
+                ],
+              "responses":{
+                  "200":{
+                      "description":"OK"
+                  }
+              }
+        }
+    },
+    "/userTrack": {
+        "post":{
+              "summary":"Fetch user's track data on the basis of email and type of task",
+              "tags": ["UserTrack"],
+              "parameters": [
+                    {
+                    "name": "email",
+                    "in": "body",
+                    "description": "Email of user"
+                    }
+                ],
               "responses":{
                   "200":{
                       "description":"OK"
