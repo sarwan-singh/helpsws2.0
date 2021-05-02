@@ -50,7 +50,7 @@ function convertDate(add)
   mm = parseInt(mm);
   dd = parseInt(dd);
 
-  convertedDate = new Date(yyyy, mm, dd)
+  convertedDate = new Date(yyyy, mm, dd, 18, 30)
   return convertedDate;
 }
 
