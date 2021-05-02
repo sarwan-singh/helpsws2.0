@@ -30,6 +30,7 @@ function getUpdateAndCreate(){
 
 function convertDate(add)
 {
+  add = add + parseInt(process.env.test);
   var date = new Date();
   date.setDate(new Date().getDate()+add);
   var mm = date.getMonth(); 
@@ -50,7 +51,7 @@ function convertDate(add)
   mm = parseInt(mm);
   dd = parseInt(dd);
 
-  convertedDate = new Date(yyyy, mm, dd, 18, 30)
+  convertedDate = new Date(yyyy, mm, dd, parseInt(process.env.hours), parseInt(process.env.mins))
   return convertedDate;
 }
 
