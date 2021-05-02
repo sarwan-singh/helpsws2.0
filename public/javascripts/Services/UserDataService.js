@@ -64,7 +64,7 @@ module.exports = {
         for(var i = 0;i<users.length;i++){
             var testQuery = {
                 email: users[i].email,
-                date: Functions.convertDate(1)
+                date: Functions.convertDate(0)
             }
 
             var testUserData = await UserWasteSchema.find(testQuery);
@@ -72,7 +72,7 @@ module.exports = {
             if(testUserData.length===0){
                 var query = {
                     email: users[i].email,
-                    date: Functions.convertDate(0)
+                    date: Functions.convertDate(-1)
                 }
 
                 var prevUserData = await UserWasteSchema.find(query);
@@ -80,7 +80,7 @@ module.exports = {
                 prevUserData = prevUserData[0];
 
                 var newUserData = await UserWasteSchema({
-                    date: Functions.convertDate(1),
+                    date: Functions.convertDate(0),
                     email: users[i].email,
                     totalWaste: prevUserData.totalWaste,
                     paperCount: prevUserData.paperCount,
@@ -106,23 +106,23 @@ module.exports = {
     getUserData :  async function(email, res, days){
         var query1 = {
             email  : email,
-            date : Functions.convertDate(1)
+            date : Functions.convertDate(0)
         }
 
         days = parseInt(days)
 
         var query2 = {
             email : email,
-            date : Functions.convertDate(-days+1)
+            date : Functions.convertDate(-days)
         }
 
         var user1 = await UserWasteSchema.find(query1);
         console.log(user1[0])
-        console.log(Functions.convertDate(1));
+        console.log(Functions.convertDate(0));
         if(days>=user1[0].days||days<0){
             return res.send(user1[0]);
         }
-        console.log(Functions.convertDate(-days+1));
+        console.log(Functions.convertDate(-days));
         
         var user2 = await UserWasteSchema.find(query2);
         // console.log(user2[0]);
