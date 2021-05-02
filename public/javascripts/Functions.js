@@ -12,6 +12,10 @@ const updateAndCreate = {
     setDefaultsOnInsert: true
 }
 
+function roundToTwo(num) {    
+    return +(Math.round(num + "e+2") + "e-2");
+}
+
 function getUrl(){
     return url;
 }

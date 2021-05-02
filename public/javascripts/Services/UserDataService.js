@@ -107,7 +107,7 @@ module.exports = {
 
         var user1 = await UserWasteSchema.find(query1);
 
-        if(days===-1||days>=user1[0].day){
+        if(days===-1||days>=user1[0].day||days===undefined){
             return res.send(user1[0]);
         }
 
