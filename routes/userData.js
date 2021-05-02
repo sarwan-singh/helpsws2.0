@@ -23,8 +23,6 @@ router.post('/userData', async function(req, res, next){
 
     var days = req.body.days;
 
-    console.log(days);
-
     if(days===undefined){
         days = -1;
     }

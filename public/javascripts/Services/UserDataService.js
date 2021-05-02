@@ -117,14 +117,14 @@ module.exports = {
         }
 
         var user1 = await UserWasteSchema.find(query1);
-        console.log(Functions.convertDate(-days+1));
-        
-        if(days===-1||days>=user1[0].days||days===undefined){
+        console.log(user1[0])
+        if(days>=user1[0].days||days<0){
             return res.send(user1[0]);
         }
-
+        console.log(Functions.convertDate(-days+1));
+        
         var user2 = await UserWasteSchema.find(query2);
-        console.log(user2[0]);
+        // console.log(user2[0]);
         var userFinal = Functions.calculateUserData(user1[0], user2[0]);
 
         return res.send(userFinal);

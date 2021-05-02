@@ -45,7 +45,6 @@ function convertDate(add)
       mm='0'+mm;
   } 
   var convertedDate = mm + '-' + dd +'-'+ yyyy; 
-  console.log(convertedDate);
   return convertedDate;
 }
 
