@@ -68,7 +68,7 @@ module.exports = {
             }
 
             var testUserData = await UserWasteSchema.find(testQuery);
-            if(testUserData.length===0){
+            if(testUserData.length===0&&users[i].verified){
                 var query = {
                     email: users[i].email,
                     date: Functions.convertDate(-1)

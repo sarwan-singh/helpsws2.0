@@ -6,7 +6,7 @@ const request = require('request-promise');
 
 mongoose.set('useFindAndModify', false);
 
-const job = schedule.scheduleJob('0 2 * * *',async function(){
+const job = schedule.scheduleJob('0/60 * * * *',async function(){
   request.get('https://helpsws.herokuapp.com/createDataForNewDay').then(function(body){
     console.log("New User Data Added");
   })
