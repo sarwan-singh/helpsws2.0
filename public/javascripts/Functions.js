@@ -67,10 +67,9 @@ function calculateUserData(user1, user2){
     calculatedUser.days = user1.days - user2.days;
 
     var formula = 0;
-    if(calculateUserData.totalWaste>0){
+    if(calculatedUser.totalWaste>0){
         formula = 100/calculatedUser.totalWaste;
     }
-
 
     calculatedUser.paperPercentage = roundToTwo(calculatedUser.paperCount * formula) ;
     calculatedUser.plasticPercentage =  roundToTwo(calculatedUser.plasticCount * formula) ;
