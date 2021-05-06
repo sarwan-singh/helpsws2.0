@@ -64,7 +64,6 @@ function calculateUserData(user1, user2){
     calculatedUser.glassCount = user1.glassCount - user2.glassCount;
     calculatedUser.metalCount = user1.metalCount - user2.metalCount;
     calculatedUser.bioCount = user1.bioCount - user2.bioCount;
-    calculatedUser.days = user1.days - user2.days;
 
     var formula = 0;
     if(calculatedUser.totalWaste>0){
