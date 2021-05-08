@@ -22,6 +22,6 @@ function decrypt(text) {
     var decoded = decipher.update(text, 'hex', 'utf8');
     decoded += decipher.final('utf8');
 	return decoded.toString();
-}
+}   
 
 module.exports = { decrypt, encrypt };
