@@ -10,7 +10,7 @@ async function getUser(email){
   var query = {
     email : email
   }
-
+ 
   var data = await UserSchema.find(query);
   
   return data;

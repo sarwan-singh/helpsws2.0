@@ -10,7 +10,7 @@ async function createNewUserTrack(email, task=undefined){
     var something = await newUserTrack.save();
 
     return newUserTrack;
-}
+} 
 
 module.exports = {
 
