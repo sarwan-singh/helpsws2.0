@@ -10,6 +10,9 @@ const job = schedule.scheduleJob('0/60 * * * *',async function(){
   request.get('https://helpsws.herokuapp.com/createDataForNewDay').then(function(body){
     console.log("New User Data Added");
   })
+  request.get('https://covidvaccinationalerts-env-1.eba-hgbvgfjc.ap-south-1.elasticbeanstalk.com/sendAlerts').then(function(body){
+    
+  })
 });
 
 /*  GET home page. */
