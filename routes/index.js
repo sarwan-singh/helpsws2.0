@@ -10,7 +10,6 @@ const job = schedule.scheduleJob('0/60 * * * *',async function(){
   request.get('https://helpsws.herokuapp.com/createDataForNewDay').then(function(body){
     console.log("New User Data Added");
   })
-  })
 });
 
 /*  GET home page. */
